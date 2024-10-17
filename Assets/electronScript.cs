@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class electronScript : MonoBehaviour
 {
-    private atomScript atomScript;
+    public atomScript atomScript;
     // Start is called before the first frame update
+    void Update()
+    {
+        atomScript = GameObject.Find("Atom(Clone)").GetComponent<atomScript>();
+    }
     void Awake()
     {
-        atomScript = GameObject.Find("Atom").GetComponent<atomScript>();
+        atomScript = GameObject.Find("Atom(Clone)").GetComponent<atomScript>();
         for(int i = 0; i < 16; i++)
         {
             if(atomScript.electrons[i] == null)
@@ -18,6 +22,7 @@ public class electronScript : MonoBehaviour
         }
         StartCoroutine("DestroyObject");
     }
+    
 
     IEnumerator DestroyObject() 
     {

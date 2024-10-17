@@ -14,11 +14,11 @@ public class isotopeScript : MonoBehaviour
     public void SecondMost()
     {
         Destroy(GameObject.Find("Atom(Clone)"));
-        Instantiate(isotopes[1], new Vector3(0,0,0), Quaternion.identity);
+        Instantiate(isotopes[1], new Vector3(0,0,0), Quaternion.Euler(0, 0, -45));
     }
     public void ThirdMost()
     {
         Destroy(GameObject.Find("Atom(Clone)"));
-        Instantiate(isotopes[2], new Vector3(0,0,0), Quaternion.identity);
+        Instantiate(isotopes[2], new Vector3(0,0,0), Quaternion.Euler(0, 0, 45));
     }
 }

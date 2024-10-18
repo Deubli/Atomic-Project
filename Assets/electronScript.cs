@@ -27,6 +27,14 @@ public class electronScript : MonoBehaviour
     IEnumerator DestroyObject() 
     {
         yield return new WaitForSeconds(1.99f);
-        Destroy(gameObject);
+        if(atomScript.pause == false)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            StartCoroutine("DestroyObject");
+        }
+
     }
 }

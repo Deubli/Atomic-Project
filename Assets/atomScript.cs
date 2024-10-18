@@ -18,10 +18,12 @@ public class atomScript : MonoBehaviour
     private int charge;
     public string chargeTypeText;
     [SerializeField] private bool Sulfide;
+    public bool pause;
     
     // Start is called before the first frame update
     void Start()
     {
+        pause = false;
         StartCoroutine("SpawnElectrons");
        chargeText = GameObject.Find("Charge").GetComponent<TMP_Text>();
        electronText = GameObject.Find("ElectronAmount").GetComponent<TMP_Text>();
@@ -45,18 +47,38 @@ public class atomScript : MonoBehaviour
             Sulfide = false;
             ionText.text = "Neutral Atom";
         }
-        print(Sulfide);
     }
     IEnumerator SpawnElectrons()
     {
         yield return new WaitForSeconds(2);
-        for(int i = 0; i < electronAmnt; i++)
+        print(pause);
+        if(pause == false)
         {
-            int randomNumber;
-            Vector3 pos= new Vector3(Random.value- 0.5f, Random.value-0.5f, 0).normalized * Random.Range(4f,5.5f);
-            Instantiate(electron, new Vector3(pos.x, pos.y, transform.position.z), Quaternion.identity);
+            for(int i = 0; i < electronAmnt; i++)
+            {
+                int randomNumber;
+                Vector3 pos= new Vector3(Random.value- 0.5f, Random.value-0.5f, 0).normalized * Random.Range(4f,5.5f);
+                Instantiate(electron, new Vector3(pos.x, pos.y, transform.position.z), Quaternion.identity);
+            }
+        }
+        else
+        {
+            yield return null;
         }
         StartCoroutine("SpawnElectrons");
+    }
+    public void Pause()
+    {
+        if(pause)
+        {
+            pause = false;
+            return;
+        }
+        else if(!pause)
+        {
+            pause = true;
+            return;
+        }
     }
     public void AddElectron()
     {
